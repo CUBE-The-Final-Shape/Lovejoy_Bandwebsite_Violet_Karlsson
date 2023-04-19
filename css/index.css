@@ -1,0 +1,60 @@
+.coverImage {
+  background-image: url("../media/indexBG.png");
+  background-attachment: fixed;
+}
+
+.aboutImage {
+  background-image: url("../media/aboutLovejoy.png");
+  background-attachment: fixed;
+}
+
+.coverLogo {
+  margin-top: 16.6%;
+  margin-bottom: 16.6%;
+}
+
+.footer {
+   color: #212529 !important;
+   background-color: #212529 !important;
+}
+
+body {
+  background-color: #fffce8;
+  font-family: 'Montserrat';
+}
+
+.band-img-sm {
+  min-width: 15vh !important;
+}
+
+.band-img-lg {
+  max-width: 20vw !important;
+}
+
+.albumTitle{
+  font-size: 30px;
+}
+
+.albumDisplay{
+  background-color: #f9f9f9;
+  border-radius: 25px;
+  padding: 3vh;
+}
+
+.streamon {
+  font-size: 25px;
+  text-decoration: none;
+  color: #000000;
+}
+
+.tickets {
+  font-family: 'Montserrat';
+  height: 100%;
+  width: 30%;
+  border-radius: 50px;
+}
+
+.indent {
+  margin: 0;
+  text-align: justify;
+}
