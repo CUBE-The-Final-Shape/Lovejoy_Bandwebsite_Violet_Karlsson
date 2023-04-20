@@ -118,7 +118,6 @@ class xml_opration{
         fclose ($fp);
     }
 
-
     //pagenite function
     //when record count exceed max display counts of a page ,it will be valid
     //and it return some global variables

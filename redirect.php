@@ -57,6 +57,23 @@ if($page == "index"){
       die("Connection failed: " . mysqli_connect_error());
   }
 
+  include('xml_class.php');
+  include('constant.php');
+
+  //creat a object og class xml_opration
+  $xml = new xml_opration;
+
+  $tickets = (int) $xml->formatXmlString($_SESSION['tickets']);
+  --$tickets;
+  $date = $xml->formatXmlString($_POST['date']);
+  $country = $xml->formatXmlString($_SESSION['country']);
+  $town = $xml->formatXmlString($_POST['town']);
+  $center = $xml->formatXmlString($_POST['center']);
+  $id = $_SESSION['id'];
+
+  $xml->updateXmlFile($id, $tickets, $date, $country, $town, $center);
+  $xml->writeXmlFile();
+
   // Get the form data
   $date = $_POST['date'];
   $town = $_POST['town'];
