@@ -19,7 +19,7 @@ if(isset($auth)){
     $id = $_GET['id'];
     if ($id ==1){
          echo "<div align=center>The first must be reserved</div>";
-         echo "<meta http-equiv=\"refresh\" content=\"2 url=edit.php\">";
+         echo "<meta http-equiv=\"refresh\" content=\"2 url=tourdates.php\">";
     }
     else{
 
@@ -28,7 +28,7 @@ if(isset($auth)){
     $xml->writeXmlFile();
 
 
-    header("location:edit.php");
+    header("location:tourdates.php");
     }
   }
 } else {

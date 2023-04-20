@@ -182,9 +182,13 @@ echo" <div class='p-5 text-white coverImage'>
                $data_by_id[$id] = array();
                continue;
         }
+        if ($val['tag'] == 'tickets'){
+            $data_by_id[$id]['tickets'] = $val['value'];
+            continue;
+        }
         if ($val['tag'] == 'date'){
-        $data_by_id[$id]['date'] = $val['value'];
-        continue;
+            $data_by_id[$id]['date'] = $val['value'];
+            continue;
         }
         if ($val['tag'] == 'country'){
             $data_by_id[$id]['country'] = $val['value'];
@@ -210,10 +214,14 @@ foreach($data_by_id as $id => $val){
               </tr>
                 <tr>
                   <td>".$val['town']."</td><br>
-                  <td>".$val['center']."</td>
-                </tr><br>
-                <a href='redirect.php?id=$id' type='button' class='btn btn-dark my-2'>To booking</a>
-                </div>
+                  <td>".$val['center']."</td><br>
+                  <td>Tickets available: ".$val['tickets']."</td>
+                </tr><br>";
+                if($val['tickets'] > "0") { echo"<a href='redirect.php?id=$id&tickets=".$val['tickets']."' type='button' class='btn btn-dark my-2'>To booking</a>";}
+                else {
+                  echo"<div class='alert alert-danger' role='alert'> This concert has been sold out </div>";
+                }
+                echo"</div>
              </tr>";
     }
 echo"

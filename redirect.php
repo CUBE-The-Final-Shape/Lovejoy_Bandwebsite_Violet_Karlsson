@@ -16,6 +16,7 @@ if($page == "index"){
 
   if ($concert) {
       // Extract the data from the concert element
+      $tickets = (string)$concert->tickets;
       $date = (string)$concert->date;
       $country = (string)$concert->country;
       $town = (string)$concert->town;
@@ -23,6 +24,7 @@ if($page == "index"){
 
       // Store the variables in $_SESSION
       session_start();
+      $_SESSION['tickets'] = $tickets;
       $_SESSION['date'] = $date;
       $_SESSION['country'] = $country;
       $_SESSION['town'] = $town;
@@ -123,6 +125,7 @@ if($page == "index"){
 
   if ($concert) {
       // Extract the data from the concert element
+      $tickets = (string)$concert->tickets;
       $date = (string)$concert->date;
       $country = (string)$concert->country;
       $town = (string)$concert->town;
@@ -130,6 +133,7 @@ if($page == "index"){
 
       // Store the variables in $_SESSION
       session_start();
+      $_SESSION['tickets'] = $tickets;
       $_SESSION['date'] = $date;
       $_SESSION['country'] = $country;
       $_SESSION['town'] = $town;
@@ -157,6 +161,7 @@ if($page == "index"){
   //creat a object og class xml_opration
   $xml = new xml_opration;
 
+  $tickets = $xml->formatXmlString($_POST['tickets']);
   $date = $xml->formatXmlString($_POST['date']);
   $country = $xml->formatXmlString($_POST['country']);
   $town = $xml->formatXmlString($_POST['town']);
@@ -165,6 +170,9 @@ if($page == "index"){
 
   $errors = array();
 
+  if ($_POST['tickets'] < 0) {
+    $errors['tickets'] = "An amount of available tickets must be set and can't be negative";
+  }
   if (empty($_POST['date'])) {
     $errors['date'] = "Date can't be left empty";
   }
@@ -185,8 +193,8 @@ if($page == "index"){
       session_write_close();
       header('Location: update.php');
       exit();
-  } elseif (empty($dateErr) && empty($countryErr) && empty($townErr) && empty($centerErr)){
-  $xml->updateXmlFile($id, $date, $country, $town, $center);
+  } elseif (empty($dateErr) && empty($ticketErr) && empty($countryErr) && empty($townErr) && empty($centerErr)){
+  $xml->updateXmlFile($id, $tickets, $date, $country, $town, $center);
   $xml->writeXmlFile();
   session_write_close();
 
@@ -205,6 +213,7 @@ if($page == "index"){
   //creat a object og class xml_opration
   $xml = new xml_opration;
 
+  $tickets = $xml->formatXmlString($_POST['tickets']);
   $date = $xml->formatXmlString($_POST['date']);
   $country = $xml->formatXmlString($_POST['country']);
   $town = $xml->formatXmlString($_POST['town']);
@@ -215,6 +224,9 @@ if($page == "index"){
 
   $errors = array();
 
+  if ($_POST['tickets'] < 0) {
+    $errors['tickets'] = "An amount of available tickets must be set and can't be negative";
+  }
   if (empty($_POST['date'])) {
     $errors['date'] = "Date can't be left empty";
   }
@@ -237,9 +249,9 @@ if($page == "index"){
       header('Location: newtour.php?id='.$id);
       exit();
 
-  } elseif (empty($dateErr) && empty($countryErr) && empty($townErr) && empty($centerErr)){
+  } elseif (empty($dateErr) && empty($ticketErr) && empty($countryErr) && empty($townErr) && empty($centerErr)){
 
-  $xml->insertXmlFile($id, $date, $country, $town, $center);
+  $xml->insertXmlFile($id, $tickets, $date, $country, $town, $center);
   $xml->writeXmlFile();
   session_write_close();
   header("location:tourdates.php");

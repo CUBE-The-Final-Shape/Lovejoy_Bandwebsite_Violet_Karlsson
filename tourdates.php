@@ -87,9 +87,14 @@ if(isset($_SESSION['passkey'])){
                  $data_by_id[$id] = array();
                  continue;
           }
+
+          if ($val['tag'] == 'tickets'){
+              $data_by_id[$id]['tickets'] = $val['value'];
+              continue;
+          }
           if ($val['tag'] == 'date'){
-          $data_by_id[$id]['date'] = $val['value'];
-          continue;
+              $data_by_id[$id]['date'] = $val['value'];
+              continue;
           }
           if ($val['tag'] == 'country'){
               $data_by_id[$id]['country'] = $val['value'];
@@ -120,9 +125,10 @@ if(isset($_SESSION['passkey'])){
                 </tr>
                   <tr>
                     <td>".$val['town']."</td><br>
-                    <td>".$val['center']."</td>
+                    <td>".$val['center']."</td><br>
+                    <td>Tickets available: ".$val['tickets']."</td>
                   </tr><br>
-                  <a href='redirect.php?id=$id' type='button' class='btn btn-dark my-2'>Update entry</a>
+                  <a href='redirect.php?id=$id&tickets=".$val['tickets']."' type='button' class='btn btn-dark my-2'>Update entry</a>
                   <a href='delete.php?id=$id' type='button' class='btn btn-dark my-2'>Delete entry</a>
                   </div>
                </tr>";

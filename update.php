@@ -5,6 +5,7 @@ if(isset($_SESSION['auth'])){
   $username = $_SESSION['username'];
   $auth = $_SESSION['auth'];
   if($auth == "Admin") {
+    $tickets = $_SESSION['tickets'];
     $date = $_SESSION['date'];
     $country = $_SESSION['country'];
     $town = $_SESSION['town'];
@@ -16,10 +17,12 @@ if(isset($_SESSION['auth'])){
 }
 session_write_close();
 
+$ticketErr = "";
 $dateErr = "";
 $countryErr = "";
 $townErr = "";
 $centerErr = "";
+unset($errors);
 
 if (isset($_SESSION['errors'])) {
   $errors = $_SESSION['errors'];
@@ -27,6 +30,9 @@ unset($_SESSION['errors']);
 }
 
 if (isset($errors)) {
+    if (isset($errors['tickets'])) {
+        $ticketErr = $errors['tickets'];
+    }
     if (isset($errors['date'])) {
         $dateErr = $errors['date'];
     }
@@ -93,6 +99,8 @@ if(isset($_SESSION['date'])){
         <h1>Edit concert info</h1><hr><br>
         <form method='post' name='form1' action='redirect.php'>
             <input type='hidden' name='id' value='$id'>
+            <tr><td>Tickets: <span style='color: #bd001c;'>*$ticketErr</span></td></tr>
+            <input type='text' name='tickets' class='form-control' value='$tickets'><br>
             <tr><td>Date: (Format: MMM. DD, YYYY) <span style='color: #bd001c;'>*$dateErr</span></td></tr>
             <input type='text' name='date' class='form-control' value='$date'><br>
             <tr><td>Country: <span style='color: #bd001c;'>*$countryErr</span></td></tr>

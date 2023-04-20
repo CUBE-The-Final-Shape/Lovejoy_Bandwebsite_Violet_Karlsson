@@ -81,13 +81,14 @@ class xml_opration{
 
 
     //insert xml file
-    function insertXmlFile($id, $date, $country, $town, $center){
+    function insertXmlFile($id, $tickets, $date, $country, $town, $center){
         $this->xml = preg_replace("/^.*<root>/is", "", $this->xml);
 
         Header("Content-type:text/xml");
         $this->data = "<?xml version=\"1.0\"?>\n";
         $this->data.= "<root>\n";
         $this->data.= "<concert id=\"".$id."\">\n";
+        $this->data.= "<tickets>".$tickets."</tickets>\n";
         $this->data.= "<date>".$date."</date>\n";
         $this->data.= "<country>".$country."</country>\n";
         $this->data.= "<town>".$town."</town>\n";
@@ -98,9 +99,9 @@ class xml_opration{
 
 
     //update xml file
-    function updateXmlFile($id, $date, $country, $town, $center){
+    function updateXmlFile($id, $tickets, $date, $country, $town, $center){
         $this->data = preg_replace("/<concert id=\"".$id."\">.*<\/center>/isU",
-                "<concert id=\"".$id."\">\n<date>".$date."</date>\n<country>".$country."</country>\n<town>".$town."</town>\n<center>".$center."</center>", $this->xml);
+                "<concert id=\"".$id."\">\n<tickets>".$tickets."</tickets>\n<date>".$date."</date>\n<country>".$country."</country>\n<town>".$town."</town>\n<center>".$center."</center>", $this->xml);
     }
 
 

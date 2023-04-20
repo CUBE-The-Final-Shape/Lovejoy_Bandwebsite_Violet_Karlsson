@@ -4,6 +4,7 @@ if(isset($_SESSION['username'])){
   $username = $_SESSION['username'];
   $auth = $_SESSION['auth'];
 }
+$tickets = $_SESSION['tickets'];
 $date = $_SESSION['date'];
 $country = $_SESSION['country'];
 $town = $_SESSION['town'];
@@ -87,7 +88,7 @@ echo "<div class='row'>
     <div class='col albumDisplay m-2'>
     <br>
     <h1>Order tickets for Lovejoy</h1><hr><br><h2>".$date."</h2><br>
-    <h3>".$town."<br>At ".$center."</h3><br>
+    <h3>".$town."<br>At ".$center."</h3><br><h4>Tickets available: ".$tickets."</h4>
     <form method='post' name='form1' action='redirect.php'>
         <input type='hidden' name='date' value='$date'>
         <input type='hidden' name='town' value='$town'>
@@ -100,8 +101,13 @@ echo "<div class='row'>
         <input type='tel' class='form-control' name='phone' placeholder='Phone'><br>
         <tr><td>Cardnumber: <span style='color: #bd001c;'>*$cardErr</span></td></tr>
         <input type='payment' class='form-control' name='payment' placeholder='Card-nmbr'><br>
-        <input type='submit' class='btn btn-dark my-2' value='Submit'>
-        <hr><br>
+        ";
+        if($tickets > "0") {
+          echo"<input type='submit' class='btn btn-dark my-2' value='Submit'>";
+        } else {
+          echo"<div class='alert alert-danger' role='alert'> This concert has been sold out </div>";
+        }
+        echo "<hr><br>
     </form>
   </div>
 ";
