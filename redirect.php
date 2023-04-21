@@ -64,15 +64,11 @@ if($page == "index"){
   $xml = new xml_opration;
 
   $tickets = (int) $xml->formatXmlString($_SESSION['tickets']);
-  --$tickets;
   $date = $xml->formatXmlString($_POST['date']);
   $country = $xml->formatXmlString($_SESSION['country']);
   $town = $xml->formatXmlString($_POST['town']);
   $center = $xml->formatXmlString($_POST['center']);
   $id = $_SESSION['id'];
-
-  $xml->updateXmlFile($id, $tickets, $date, $country, $town, $center);
-  $xml->writeXmlFile();
 
   // Get the form data
   $date = $_POST['date'];
@@ -82,6 +78,7 @@ if($page == "index"){
   $email = $_POST['email'];
   $phone = $_POST['phone'];
   $card = $_POST['payment'];
+  $ticketamount = (int) $_POST['ticketamount'];
 
   // Define regular expressions for validation
   $name_regex = '/^[a-zA-Z ]+$/';
@@ -91,12 +88,17 @@ if($page == "index"){
 
   $errors = array();
 
+  if($tickets >= $ticketamount){
+      $tickets = $tickets - $ticketamount;
+  } else {
+    $errors['tickets'] = "Amount of tickets not avilable";
+  }
   // Validate the form data using regular expressions
   if (!preg_match($name_regex, $name)) {
-      $errors['name'] = "Name should contain only alphabets and space";
+      $errors['name'] = "Name can only contain letters and spaces";
   }
   if (!preg_match($email_regex, $email)) {
-      $errors['email'] = "Invalid email format";
+      $errors['email'] = "Please enter a valid email or email format";
   }
   if (!preg_match($phone_regex, $phone)) {
       $errors['phone'] = "Phone number should contain 10 digits";
@@ -113,7 +115,10 @@ if($page == "index"){
       exit();
   }
 
-  if (empty($nameErr) && empty($emailErr) && empty($phoneErr) && empty($cardErr)) {
+  if (empty($nameErr) && empty($ticketErr) && empty($emailErr) && empty($phoneErr) && empty($cardErr)) {
+
+      $xml->updateXmlFile($id, $tickets, $date, $country, $town, $center);
+      $xml->writeXmlFile();
       // Insert the data into the database
       $sql = "INSERT INTO contacts (timeofday, town, center, name, mail, phone_number) VALUES ('$date', '$town', '$center', '$name', '$email', '$phone')";
       if (mysqli_query($conn, $sql)) {

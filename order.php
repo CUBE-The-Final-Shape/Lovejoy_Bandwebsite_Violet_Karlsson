@@ -17,6 +17,7 @@ $nameErr = "";
 $emailErr = "";
 $phoneErr = "";
 $cardErr = "";
+$ticketErr = "";
 
 if (isset($_SESSION['errors'])) {
   $errors = $_SESSION['errors'];
@@ -35,6 +36,9 @@ if (isset($errors)) {
     }
     if (isset($errors['payment'])) {
         $cardErr = $errors['payment'];
+    }
+    if (isset($errors['tickets'])) {
+        $ticketErr = $errors['tickets'];
     }
 }
 
@@ -85,25 +89,31 @@ echo "<html>
 echo "<div class='p-5 coverImage'>";
 echo "<input type='hidden' name='id' value='$id'><br>";
 echo "<div class='row'>
-    <div class='col albumDisplay m-2'>
-    <br>
-    <h1>Order tickets for Lovejoy</h1><hr><br><h2>".$date."</h2><br>
-    <h3>".$town."<br>At ".$center."</h3><br><h4>Tickets available: ".$tickets."</h4>
-    <form method='post' name='form1' action='redirect.php'>
+    <div class='col order m-2'><br>
+    <h1>Order tickets for <br class='d-lg-none'>".$date.", ".$town."<br> At ".$center."</h1><hr><h3>Tickets available: ".$tickets."</h3><br>
+    <form method='post' name='form1' class='albumDisplay' action='redirect.php'>
         <input type='hidden' name='date' value='$date'>
         <input type='hidden' name='town' value='$town'>
-        <input type='hidden' name='center' value='$center'><span style='color: #bd001c;'>* Mandatory</span><br><br>
-        <tr><td>Name: <span style='color: #bd001c;'>*$nameErr</span></td></tr>
-        <input type='name' class='form-control' name='name' placeholder='Name'><br>
-        <tr><td>Email: <span style='color: #bd001c;'>*$emailErr</span></td></tr>
-        <input type='email' class='form-control' name='email' placeholder='Email'><br>
-        <tr><td>Phonenumber: <span style='color: #bd001c;'>*$phoneErr</span></td></tr>
-        <input type='tel' class='form-control' name='phone' placeholder='Phone'><br>
-        <tr><td>Cardnumber: <span style='color: #bd001c;'>*$cardErr</span></td></tr>
-        <input type='payment' class='form-control' name='payment' placeholder='Card-nmbr'><br>
+        <input type='hidden' name='center' value='$center'><span style='color: #bd001c;'>* Mandatory</span><hr>
+        <div class='row'>
+          <div class='col'>
+            <tr><td>Name: <span style='color: #bd001c;'><br>*$nameErr</span></td></tr>
+            <input type='name' class='form-control' name='name' placeholder='Name'><br>
+            <tr><td>Email: <span style='color: #bd001c;'><br>*$emailErr</span></td></tr>
+            <input type='email' class='form-control' name='email' placeholder='Email'><br>
+            <tr><td>Number of tickets: <span style='color: #bd001c;'><br>*$ticketErr</span></td></tr>
+            <input type='number' class='form-control' name='ticketamount' min='1'><br>
+          </div>
+          <div class='col'>
+            <tr><td>Phonenumber: <span style='color: #bd001c;'><br>*$phoneErr</span></td></tr>
+            <input type='tel' class='form-control' name='phone' placeholder='Phone'><br>
+            <tr><td>Cardnumber: <span style='color: #bd001c;'><br>*$cardErr</span></td></tr>
+            <input type='payment' class='form-control' name='payment' placeholder='Card-nmbr'>
+          </div>
+        </div>
         ";
         if($tickets > "0") {
-          echo"<input type='submit' class='btn btn-dark my-2' value='Submit'>";
+          echo"<input type='submit' class='btn btn-dark my-2' value='Place order'>";
         } else {
           echo"<div class='alert alert-danger' role='alert'> This concert has been sold out </div>";
         }

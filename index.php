@@ -219,7 +219,7 @@ foreach($data_by_id as $id => $val){
                 </tr><br>";
                 if($val['tickets'] > "0") { echo"<a href='redirect.php?id=$id&tickets=".$val['tickets']."' type='button' class='btn btn-dark my-2'>To booking</a>";}
                 else {
-                  echo"<div class='btn btn-dark my-2' role='alert'> Sold out </div>";
+                  echo"<div class='btn btn-danger my-2' role='alert'> Sold out </div>";
                 }
                 echo"</div>
              </tr>";
