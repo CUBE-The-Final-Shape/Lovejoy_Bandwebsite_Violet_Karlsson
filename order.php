@@ -86,29 +86,29 @@ echo "<html>
              </div>
            </div>
            </nav>";
-echo "<div class='p-5 coverImage'>";
-echo "<input type='hidden' name='id' value='$id'><br>";
+echo "<div class='px-3'>";
+echo "<input type='hidden' name='id' value='$id'>";
 echo "<div class='row'>
-    <div class='col order m-2'><br>
+    <div class='col order mx-2'>
     <h1>Order tickets for <br class='d-lg-none'>".$date.", ".$town."<br> At ".$center."</h1><hr><h3>Tickets available: ".$tickets." | Price: $25 per ticket</h3><br>
     <form method='post' name='form1' class='albumDisplay' action='redirect.php'>
         <input type='hidden' name='date' value='$date'>
         <input type='hidden' name='town' value='$town'>
         <input type='hidden' name='center' value='$center'><span style='color: #bd001c;'>* Mandatory</span><hr>
-        <div class='row'>
-          <div class='col'>
+        <div class='row row-cols-1 row-cols-sm-2'>
+          <div class='col-sm'>
             <tr><td>Name: <span style='color: #bd001c;'><br>*$nameErr</span></td></tr>
             <input type='name' class='form-control' name='name' placeholder='Name'><br>
             <tr><td>Email: <span style='color: #bd001c;'><br>*$emailErr</span></td></tr>
             <input type='email' class='form-control' name='email' placeholder='Email'><br>
-            <tr><td>Ticket amount: <span style='color: #bd001c;'><br>*$ticketErr</span></td></tr>
-            <input type='number' class='form-control' id='qty' name='ticketamount' min='1'><br>
-          </div>
-          <div class='col'>
             <tr><td>Phonenumber: <span style='color: #bd001c;'><br>*$phoneErr</span></td></tr>
             <input type='tel' class='form-control' name='phone' placeholder='Phone'><br>
+          </div>
+          <div class='col-sm'>
             <tr><td>Cardnumber: <span style='color: #bd001c;'><br>*$cardErr</span></td></tr>
             <input type='payment' class='form-control' name='payment' placeholder='Card-nmbr'><br>
+            <tr><td>Ticket amount: <span style='color: #bd001c;'><br>*$ticketErr</span></td></tr>
+            <input type='number' class='form-control' id='qty' name='ticketamount' min='1'>
           </div>
         </div>
         ";
