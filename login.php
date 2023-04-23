@@ -27,7 +27,7 @@ session_start();
    unset($auth);
    }
 
- } elseif($auth == "Admin Login"){
+ } elseif($auth == "Admin"){
    $query = "SELECT * FROM `admin` WHERE username='$username' and password='$password'";
 
    $result = mysqli_query($connection, $query) or die(mysqli_error($connection));
@@ -58,11 +58,6 @@ echo "<html>
             <link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC' crossorigin='anonymous'>
             <script src='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js' integrity='sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM' crossorigin='anonymous'></script>
             <link href='https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css' rel='stylesheet'/>
-            <style>
-            body{
-            overflow-y: hidden;
-            }
-            </style>
          </head>
          <body bgcolor='#FFFBDA'>";
          echo" <nav class='navbar navbar-expand-sm bg-dark navbar-dark sticky-top'>
@@ -99,16 +94,16 @@ echo "<div class='d-flex justify-content-center'>
     <div class='albumDisplay m-5 p-5'>
     <br>
     <h1>Sign in</h1><hr>
-    <form method='post' name='form1'>";
+    <form method='post' class='py-1' name='form1'>";
     if(isset($fmsg)){ echo"<div class='alert alert-danger' role='alert'> ".$fmsg." </div>"; }else{}
 echo "
       <input type='username' class='form-control' name='username' placeholder='Username' required><br>
       <input type='password' class='form-control' id='inputPassword' name='password' placeholder='Password' required><br>
       <input type='submit' class='btn btn-success my-2' name='auth' value='Login'>
-      <input type='submit' class='btn btn-warning my-2' name='auth' value='Admin Login'>
+      <input type='submit' class='btn btn-dark my-2' name='auth' value='Admin'>
       <a href='index.php#' class='btn btn-danger'>Cancel</a>
       <br>
-    </form><hr><br>
+    </form><hr>
   </div>
 ";
 echo "</div><br><br><br><br>";

@@ -92,7 +92,7 @@ if(isset($_SESSION['date'])){
                  </div>
                </div>
                </nav>";
-    echo "<div class='p-5 coverImage'>";
+    echo "<div class='px-5'>";
     echo "<div class='row'>
         <div class='col albumDisplay m-2'>
         <br>

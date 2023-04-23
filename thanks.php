@@ -50,7 +50,7 @@ echo "<html>
                  </li>
                  <li class='nav-item'>";
                    if(isset($auth)){
-                     echo"<a class='nav-link navbarFont' href='logout.php'>".$auth." sign out</a>";
+                     echo"<a class='nav-link navbarFont' href='logout.php'>Sign out</a>";
                    }else{
                      echo"<a class='nav-link navbarFont' href='login.php'>Sign in</a>";
                    }
@@ -59,7 +59,7 @@ echo "<html>
              </div>
            </div>
            </nav>";
-echo "<div class='p-5 coverImage'>";
+echo "<div class='py-5 px-3 coverImage'>";
 echo "<div class='row py-4 my-5'>
         <div class='col albumDisplay'>
         <br>
