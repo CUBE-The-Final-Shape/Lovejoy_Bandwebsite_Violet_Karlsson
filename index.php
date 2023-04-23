@@ -138,14 +138,10 @@ echo" <div class='p-5 text-white coverImage'>
               <div class='row d-lg-none'>
                 <div class='col'>
                   <img src='media/members/Wilbur.png' alt='Wiliam Gold' class='img-fluid rounded-circle band-img-sm'>
-                </div>
-                <div class='col'>
                   <img src='media/members/Joe.png' alt='Joe Goldmith' class='img-fluid rounded-circle band-img-sm'>
                 </div>
                 <div class='col'>
                   <img src='media/members/Mark.png' alt='Mark Boardman' class='img-fluid rounded-circle band-img-sm'>
-                </div>
-                <div class='col'>
                   <img src='media/members/Ash.png' alt='Ash Kabosu' class='img-fluid rounded-circle band-img-sm'>
                 </div>
               </div>
