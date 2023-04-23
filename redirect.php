@@ -79,6 +79,9 @@ if($page == "index"){
   $phone = $_POST['phone'];
   $card = $_POST['payment'];
   $ticketamount = (int) $_POST['ticketamount'];
+  $_SESSION['price'] = $ticketamount * 25;
+  $_SESSION['email'] = $email;
+  $_SESSION['ticketamount'] = $ticketamount;
 
   // Define regular expressions for validation
   $name_regex = '/^[a-zA-Z ]+$/';

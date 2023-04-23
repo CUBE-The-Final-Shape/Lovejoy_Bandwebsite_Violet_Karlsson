@@ -90,7 +90,7 @@ echo "<div class='p-5 coverImage'>";
 echo "<input type='hidden' name='id' value='$id'><br>";
 echo "<div class='row'>
     <div class='col order m-2'><br>
-    <h1>Order tickets for <br class='d-lg-none'>".$date.", ".$town."<br> At ".$center."</h1><hr><h3>Tickets available: ".$tickets."</h3><br>
+    <h1>Order tickets for <br class='d-lg-none'>".$date.", ".$town."<br> At ".$center."</h1><hr><h3>Tickets available: ".$tickets." | Price: $25 per ticket</h3><br>
     <form method='post' name='form1' class='albumDisplay' action='redirect.php'>
         <input type='hidden' name='date' value='$date'>
         <input type='hidden' name='town' value='$town'>
@@ -101,14 +101,14 @@ echo "<div class='row'>
             <input type='name' class='form-control' name='name' placeholder='Name'><br>
             <tr><td>Email: <span style='color: #bd001c;'><br>*$emailErr</span></td></tr>
             <input type='email' class='form-control' name='email' placeholder='Email'><br>
-            <tr><td>Number of tickets: <span style='color: #bd001c;'><br>*$ticketErr</span></td></tr>
-            <input type='number' class='form-control' name='ticketamount' min='1'><br>
+            <tr><td>Ticket amount: <span style='color: #bd001c;'><br>*$ticketErr</span></td></tr>
+            <input type='number' class='form-control' id='qty' name='ticketamount' min='1'><br>
           </div>
           <div class='col'>
             <tr><td>Phonenumber: <span style='color: #bd001c;'><br>*$phoneErr</span></td></tr>
             <input type='tel' class='form-control' name='phone' placeholder='Phone'><br>
             <tr><td>Cardnumber: <span style='color: #bd001c;'><br>*$cardErr</span></td></tr>
-            <input type='payment' class='form-control' name='payment' placeholder='Card-nmbr'>
+            <input type='payment' class='form-control' name='payment' placeholder='Card-nmbr'><br>
           </div>
         </div>
         ";
@@ -117,7 +117,7 @@ echo "<div class='row'>
         } else {
           echo"<div class='alert alert-danger' role='alert'> This concert has been sold out </div>";
         }
-        echo "<hr><br>
+        echo "<hr>
     </form>
   </div>
 ";
