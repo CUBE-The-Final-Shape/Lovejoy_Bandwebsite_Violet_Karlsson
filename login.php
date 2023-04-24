@@ -41,7 +41,7 @@ include('components/head.php');
 include('components/navbar.php');
 
 echo "<div class='aboutImage'>";
-echo "<br><br><br><br>";
+echo "<br><br>";
 echo "<div class='d-flex justify-content-center'>
     <div class='albumDisplay m-5 p-5'><br>
     <h1>Sign in</h1><hr>
@@ -52,12 +52,12 @@ echo "
       <input type='mail' class='form-control' name='email' placeholder='Email' required><br>
       <input type='password' class='form-control' id='inputPassword' name='password' placeholder='Password' required><br>
       <input type='submit' class='btn btn-success' name='auth' value='Sign in'>
-      <a href='index.php#' class='btn btn-dark m-2'>Cancel</a><br>
+      <a href='index.php#' class='btn btn-dark my-2'>Cancel</a><br>
       <a href='register.php' class='signup'>Don't have an account? Sign up here</a>
     </form><hr>
   </div>
 ";
-echo "</div><br><br><br><br>";
+echo "</div><br><br><br>";
 echo "</table>
     <br><br><div class='footer'>
       <footer class='py-3 footer'>

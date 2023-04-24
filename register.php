@@ -75,7 +75,7 @@ include('components/head.php');
 include('components/navbar.php');
 
 echo "<div class='aboutImage'>";
-echo "<br><br><br><br>";
+echo "<br><br>";
 echo "<div class='d-flex justify-content-center'>
     <div class='albumDisplay m-5 p-5'><br>
     <h1>Register account</h1><hr>
@@ -93,7 +93,7 @@ echo "
     </form><hr>
   </div>
 ";
-echo "</div><br><br><br><br>";
+echo "</div><br><br>";
 echo "</table>
     <br><br><div class='footer'>
       <footer class='py-3 footer'>
