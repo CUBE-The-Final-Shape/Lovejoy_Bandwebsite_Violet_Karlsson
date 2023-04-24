@@ -48,19 +48,11 @@ if($page == "index"){
   session_start();
 
   // Connect to the database
-  $host = "localhost";
-  $username = "root";
-  $password = "";
-  $database = "tickets";
-  $conn = mysqli_connect($host, $username, $password, $database);
-  if (!$conn) {
-      die("Connection failed: " . mysqli_connect_error());
-  }
+  require('components/connect.php');
 
   include('xml_class.php');
   include('constant.php');
 
-  //creat a object og class xml_opration
   $xml = new xml_opration;
 
   $tickets = (int) $xml->formatXmlString($_SESSION['tickets']);
@@ -71,9 +63,6 @@ if($page == "index"){
   $id = $_SESSION['id'];
 
   // Get the form data
-  $date = $_POST['date'];
-  $town = $_POST['town'];
-  $center = $_POST['center'];
   $name = $_POST['name'];
   $email = $_POST['email'];
   $phone = $_POST['phone'];
@@ -123,8 +112,8 @@ if($page == "index"){
       $xml->updateXmlFile($id, $tickets, $date, $country, $town, $center, $ticketamount);
       $xml->writeXmlFile();
       // Insert the data into the database
-      $sql = "INSERT INTO contacts (timeofday, town, center, name, mail, phone_number, ticket_amount) VALUES ('$date', '$town', '$center', '$name', '$email', '$phone', '$ticketamount')";
-      if (mysqli_query($conn, $sql)) {
+      $sql = "INSERT INTO orders (timeofday, town, center, name, mail, phone_number, ticket_amount) VALUES ('$date', '$town', '$center', '$name', '$email', '$phone', '$ticketamount')";
+      if (mysqli_query($connection, $sql)) {
           header('Location: thanks.php');
           exit();
       } else {
@@ -135,7 +124,6 @@ if($page == "index"){
   mysqli_close($conn);
 
   session_write_close();
-
 
 } elseif($page == "edit") {
 
@@ -193,23 +181,7 @@ if($page == "index"){
   $center = $xml->formatXmlString($_POST['center']);
   $id = $_POST['id'];
 
-  $errors = array();
-
-  if ($_POST['tickets'] < 0) {
-    $errors['tickets'] = "An amount of available tickets must be set and can't be negative";
-  }
-  if (empty($_POST['date'])) {
-    $errors['date'] = "Date can't be left empty";
-  }
-  if (empty($_POST['country'])) {
-    $errors['country'] = "Country can't be left empty";
-  }
-  if (empty($_POST['town'])) {
-    $errors['town'] = "Town can't be left empty";
-  }
-  if (empty($_POST['center'])) {
-    $errors['center'] = "Center can't be left empty";
-  }
+  include('components/xml_errors.php');
 
   if (count($errors) > 0) {
 
@@ -246,24 +218,7 @@ if($page == "index"){
   $id = (int)$_POST['id'] + 1;
   /* $idInt = 1;
   $id = "$_POST['id']-$idInt"; */
-
-  $errors = array();
-
-  if ($_POST['tickets'] < 0) {
-    $errors['tickets'] = "An amount of available tickets must be set and can't be negative";
-  }
-  if (empty($_POST['date'])) {
-    $errors['date'] = "Date can't be left empty";
-  }
-  if (empty($_POST['country'])) {
-    $errors['country'] = "Country can't be left empty";
-  }
-  if (empty($_POST['town'])) {
-    $errors['town'] = "Town can't be left empty";
-  }
-  if (empty($_POST['center'])) {
-    $errors['center'] = "Center can't be left empty";
-  }
+  include('components/xml_errors.php');
 
   if (count($errors) > 0) {
 
