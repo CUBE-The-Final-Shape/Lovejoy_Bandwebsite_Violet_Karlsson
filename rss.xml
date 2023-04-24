@@ -15,7 +15,7 @@
 <center>SWX</center>
 </concert>
 <concert id="5">
-<tickets>100</tickets>
+<tickets>95</tickets>
 <date> Mar. 29, 2023</date>
 <country>United Kingdom</country>
 <town>Machester</town>
@@ -43,7 +43,7 @@
 <center>SWG3 Poetry Club</center>
 </concert>
 <concert id="1">
-<tickets>45</tickets>
+<tickets>25</tickets>
 <date>Mar. 24, 2023</date>
 <country>United Kingdom</country>
 <town>Newcastle Upon Tyne</town>

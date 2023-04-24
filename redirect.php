@@ -120,10 +120,10 @@ if($page == "index"){
 
   if (empty($nameErr) && empty($ticketErr) && empty($emailErr) && empty($phoneErr) && empty($cardErr)) {
 
-      $xml->updateXmlFile($id, $tickets, $date, $country, $town, $center);
+      $xml->updateXmlFile($id, $tickets, $date, $country, $town, $center, $ticketamount);
       $xml->writeXmlFile();
       // Insert the data into the database
-      $sql = "INSERT INTO contacts (timeofday, town, center, name, mail, phone_number) VALUES ('$date', '$town', '$center', '$name', '$email', '$phone')";
+      $sql = "INSERT INTO contacts (timeofday, town, center, name, mail, phone_number, ticket_amount) VALUES ('$date', '$town', '$center', '$name', '$email', '$phone', '$ticketamount')";
       if (mysqli_query($conn, $sql)) {
           header('Location: thanks.php');
           exit();
