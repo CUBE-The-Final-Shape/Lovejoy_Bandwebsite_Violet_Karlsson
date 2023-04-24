@@ -81,7 +81,7 @@ echo "
       <input type='mail' class='form-control' name='email' placeholder='Email' required><br>
       <input type='password' class='form-control' id='inputPassword' name='password' placeholder='Password' required><br>
       <input type='submit' class='btn btn-success' name='register' value='Register'>
-      <a href='login.php' class='btn btn-dark m-2'>Back to sign in</a><br>
+      <a href='login.php' class='btn btn-dark my-2'>Back to sign in</a><br>
     </form><hr>
   </div>
 ";
