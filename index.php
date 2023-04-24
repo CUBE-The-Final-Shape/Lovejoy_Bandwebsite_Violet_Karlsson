@@ -44,7 +44,7 @@ echo" <nav class='navbar navbar-expand-sm bg-dark navbar-dark sticky-top'>
           if(isset($auth)){
             echo"<a class='nav-link navbarFont' href='components/logout.php'>Sign out</a>";
           }else{
-            echo"<a class='nav-link navbarFont' href='login.php'>Sign in</a>";
+            echo"<a class='nav-link navbarFont' href='login.php'>Sign in/Sign up</a>";
           }
   echo"</li>
       </ul>

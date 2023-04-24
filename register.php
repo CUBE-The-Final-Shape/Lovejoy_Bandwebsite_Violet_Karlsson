@@ -89,7 +89,8 @@ echo "
       <input type='password' class='form-control' id='inputPassword' name='password' placeholder='Password' required><br>
       <input type='password' class='form-control' name='confirmPass' placeholder='Confirm password' required><br>
       <input type='submit' class='btn btn-success' name='register' value='Register'>
-      <a href='login.php' class='btn btn-dark my-2'>Back to sign in</a><br>
+      <a href='index.php' class='btn btn-dark my-2'>Cancel</a><br>
+      <a href='login.php' class='signup'>Already have an account? Sign in here</a>
     </form><hr>
   </div>
 ";
