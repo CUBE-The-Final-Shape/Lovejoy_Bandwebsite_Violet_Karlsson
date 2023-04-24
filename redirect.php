@@ -117,7 +117,7 @@ if($page == "index"){
           header('Location: thanks.php');
           exit();
       } else {
-          echo "Error adding record: " . mysqli_error($conn);
+          echo "Error adding record: " . mysqli_error($connection);
       }
   }
   // Close the database connection

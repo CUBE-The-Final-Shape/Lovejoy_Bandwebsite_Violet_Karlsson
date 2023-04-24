@@ -2,14 +2,15 @@
 session_start();
  require('components/connect.php');
 
- if (isset($_POST['username']) and isset($_POST['password'])){
+ if (isset($_POST['username']) and isset($_POST['email']) and isset($_POST['password'])){
  //3.1.1 Assigning posted values to variables.
  $username = $_POST['username'];
+ $email = $_POST['email'];
  $password = $_POST['password'];
  $auth = $_POST['auth'];
 
  if($auth == "Login") {
-   $query = "SELECT * FROM `accounts` WHERE username='$username' and password='$password'";
+   $query = "SELECT * FROM `accounts` WHERE username='$username' and email='$email' and password='$password'";
 
    $result = mysqli_query($connection, $query) or die(mysqli_error($connection));
    $count = mysqli_num_rows($result);
@@ -48,11 +49,11 @@ echo "<div class='d-flex justify-content-center'>
     if(isset($fmsg)){ echo"<div class='alert alert-danger' role='alert'> ".$fmsg." </div>"; }else{}
 echo "
       <input type='username' class='form-control' name='username' placeholder='Username' required><br>
+      <input type='mail' class='form-control' name='email' placeholder='Email' required><br>
       <input type='password' class='form-control' id='inputPassword' name='password' placeholder='Password' required><br>
-      <div class='d-flex justify-content-center'>
-        <input type='submit' class='btn btn-success m-2' name='auth' value='Login'>
-        <a href='index.php#' class='btn btn-danger m-2'>Cancel</a>
-      </div>
+      <input type='submit' class='btn btn-success' name='auth' value='Login'>
+      <a href='index.php#' class='btn btn-dark m-2'>Cancel</a><br>
+      <a href='register.php' class='signup'>Don't have an account? Sign up here</a>
     </form><hr>
   </div>
 ";

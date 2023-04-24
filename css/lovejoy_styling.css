@@ -52,6 +52,11 @@ body {
   color: #000000;
 }
 
+.signup {
+  text-decoration: none;
+  color: #000000;
+}
+
 .tickets {
   font-family: 'Montserrat';
   height: 100%;
