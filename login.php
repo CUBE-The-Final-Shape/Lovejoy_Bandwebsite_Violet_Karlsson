@@ -2,14 +2,14 @@
 session_start();
  require('components/connect.php');
 
- if (isset($_POST['username']) and isset($_POST['email']) and isset($_POST['password'])){
+ if (isset($_POST['username']) && isset($_POST['email']) &&- isset($_POST['password'])){
  //3.1.1 Assigning posted values to variables.
  $username = $_POST['username'];
  $email = $_POST['email'];
  $password = $_POST['password'];
  $auth = $_POST['auth'];
 
- if($auth == "Login") {
+ if($auth == "Sign in") {
    $query = "SELECT * FROM `accounts` WHERE username='$username' and email='$email' and password='$password'";
 
    $result = mysqli_query($connection, $query) or die(mysqli_error($connection));
@@ -72,5 +72,4 @@ echo "</table>
     </footer>
     </div></div></body>";
 echo "</html>";
-
 ?>
