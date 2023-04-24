@@ -11,6 +11,7 @@ if (isset($_POST['username']) and isset($_POST['email']) and isset($_POST['passw
   $username = $_POST['username'];
   $email = $_POST['email'];
   $password = $_POST['password'];
+  $confirmPass = $_POST['confirmPass'];
 
     $name_regex = '/^[a-zA-Z ]+$/';
     $email_regex = '/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/';
@@ -26,6 +27,12 @@ if (isset($_POST['username']) and isset($_POST['email']) and isset($_POST['passw
     }
     if (!preg_match($pass_regex, $password)) {
         $errors['password'] = "Please enter a valid password";
+    }
+    if (!preg_match($pass_regex, $confirmPass)) {
+        $errors['password'] = "Please enter a valid password for confirmation";
+    }
+    if ($confirmPass !== $password) {
+        $errors['password'] = "The confirmation password does not match";
     }
 
     $_SESSION['errors'] = $errors;
@@ -80,6 +87,7 @@ echo "
       <input type='username' class='form-control' name='username' placeholder='Username' required><br>
       <input type='mail' class='form-control' name='email' placeholder='Email' required><br>
       <input type='password' class='form-control' id='inputPassword' name='password' placeholder='Password' required><br>
+      <input type='password' class='form-control' name='confirmPass' placeholder='Confirm password' required><br>
       <input type='submit' class='btn btn-success' name='register' value='Register'>
       <a href='login.php' class='btn btn-dark my-2'>Back to sign in</a><br>
     </form><hr>

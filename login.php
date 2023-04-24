@@ -51,7 +51,7 @@ echo "
       <input type='username' class='form-control' name='username' placeholder='Username' required><br>
       <input type='mail' class='form-control' name='email' placeholder='Email' required><br>
       <input type='password' class='form-control' id='inputPassword' name='password' placeholder='Password' required><br>
-      <input type='submit' class='btn btn-success' name='auth' value='Login'>
+      <input type='submit' class='btn btn-success' name='auth' value='Sign in'>
       <a href='index.php#' class='btn btn-dark m-2'>Cancel</a><br>
       <a href='register.php' class='signup'>Don't have an account? Sign up here</a>
     </form><hr>
