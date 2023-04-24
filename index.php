@@ -21,21 +21,7 @@ $xml->page();
 //display records for appointed count
 $data = $xml->xmlPartFormat($page,$pagecount);
 
-echo" <html>
-  <head>
-  <title>Lovejoy - Unoffical</title>
-  <meta charset='utf-8'>
-  <link href='css/index.css' rel='stylesheet'>
-  <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
-  <link rel='apple-touch-icon' href='https://getbootstrap.com/docs/5.2/assets/img/favicons/apple-touch-icon.png' sizes='180x180'>
-  <link rel='mask-icon' href='https://getbootstrap.com/docs/5.2/assets/img/favicons/safari-pinned-tab.svg' color='#712cf9'>
-  <link rel='icon' type='image/x-icon' href='media/favicon.ico'>
-  <meta name='viewport' content='width=device-width, initial-scale=1'>
-  <link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC' crossorigin='anonymous'>
-  <script src='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js' integrity='sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM' crossorigin='anonymous'></script>
-  <link href='https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css' rel='stylesheet'/>
-</head>
-<body>";
+include('components/head.php');
 
 echo" <nav class='navbar navbar-expand-sm bg-dark navbar-dark sticky-top'>
     <div class='container-fluid'>
@@ -56,9 +42,9 @@ echo" <nav class='navbar navbar-expand-sm bg-dark navbar-dark sticky-top'>
         </li>
         <li class='nav-item'>";
           if(isset($auth)){
-            echo"<a class='nav-link navbarFont' href='logout.php'>Sign out</a>";
+            echo"<a class='nav-link navbarFont' href='components/logout.php'>Sign out</a>";
           }else{
-            echo"<a class='nav-link navbarFont' href='login.php'>Sign in</a>";
+            echo"<a class='nav-link navbarFont' href='login.php'>Sign in/Sign up</a>";
           }
   echo"</li>
       </ul>
@@ -138,14 +124,10 @@ echo" <div class='p-5 text-white coverImage'>
               <div class='row d-lg-none'>
                 <div class='col'>
                   <img src='media/members/Wilbur.png' alt='Wiliam Gold' class='img-fluid rounded-circle band-img-sm'>
-                </div>
-                <div class='col'>
                   <img src='media/members/Joe.png' alt='Joe Goldmith' class='img-fluid rounded-circle band-img-sm'>
                 </div>
                 <div class='col'>
                   <img src='media/members/Mark.png' alt='Mark Boardman' class='img-fluid rounded-circle band-img-sm'>
-                </div>
-                <div class='col'>
                   <img src='media/members/Ash.png' alt='Ash Kabosu' class='img-fluid rounded-circle band-img-sm'>
                 </div>
               </div>
@@ -182,9 +164,13 @@ echo" <div class='p-5 text-white coverImage'>
                $data_by_id[$id] = array();
                continue;
         }
+        if ($val['tag'] == 'tickets'){
+            $data_by_id[$id]['tickets'] = $val['value'];
+            continue;
+        }
         if ($val['tag'] == 'date'){
-        $data_by_id[$id]['date'] = $val['value'];
-        continue;
+            $data_by_id[$id]['date'] = $val['value'];
+            continue;
         }
         if ($val['tag'] == 'country'){
             $data_by_id[$id]['country'] = $val['value'];
@@ -210,10 +196,14 @@ foreach($data_by_id as $id => $val){
               </tr>
                 <tr>
                   <td>".$val['town']."</td><br>
-                  <td>".$val['center']."</td>
-                </tr><br>
-                <a href='redirect.php?id=$id' type='button' class='btn btn-dark my-2'>To booking</a>
-                </div>
+                  <td>".$val['center']."</td><br>
+                  <td>Tickets available: ".$val['tickets']."</td>
+                </tr><br>";
+                if($val['tickets'] > "0") { echo"<a href='redirect.php?id=$id&tickets=".$val['tickets']."' type='button' class='btn btn-dark my-2'>To booking</a>";}
+                else {
+                  echo"<button class='btn btn-dark my-2' role='alert' disabled> Sold out </button>";
+                }
+                echo"</div>
              </tr>";
     }
 echo"
@@ -231,6 +221,5 @@ echo"
   </footer>
 </div>
 </body>
-</html> ";
-
+</html>";
 ?>

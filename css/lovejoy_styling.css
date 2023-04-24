@@ -19,7 +19,6 @@
 }
 
 body {
-  background-color: #fffce8;
   font-family: 'Montserrat';
 }
 
@@ -41,8 +40,19 @@ body {
   padding: 3vh;
 }
 
+.order {
+  background-color: #fff;
+  border-radius: 25px;
+  padding: 3vh;
+}
+
 .streamon {
   font-size: 25px;
+  text-decoration: none;
+  color: #000000;
+}
+
+.signup {
   text-decoration: none;
   color: #000000;
 }

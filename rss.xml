@@ -1,48 +1,49 @@
 <?xml version="1.0"?>
 <root>
-<concert id="8">
-<date>Aug. 27, 2023</date>
-<country>United Kingdom</country>
-<town>Reading</town>
-<center>Reading Festival 2023</center>
-</concert>
 <concert id="7">
+<tickets>100</tickets>
 <date> Apr. 4, 2023</date>
 <country>Poland</country>
 <town>Gdańsk</town>
 <center>Stary Maneż</center>
 </concert>
 <concert id="6">
+<tickets>100</tickets>
 <date> Mar. 31, 2023</date>
 <country>United Kingdom</country>
 <town>Bristol</town>
 <center>SWX</center>
 </concert>
 <concert id="5">
+<tickets>95</tickets>
 <date> Mar. 29, 2023</date>
 <country>United Kingdom</country>
 <town>Machester</town>
 <center>Q2 Ritz Manchester</center>
 </concert>
 <concert id="4">
+<tickets>100</tickets>
 <date> Mar. 28, 2023</date>
 <country>United Kingdom</country>
 <town>London</town>
 <center>Electric Brixton</center>
 </concert>
 <concert id="3">
+<tickets>100</tickets>
 <date> Mar. 27, 2023</date>
 <country>United Kingdom</country>
 <town>Birmingham</town>
 <center>Q2 Institute</center>
 </concert>
 <concert id="2">
+<tickets>0</tickets>
 <date> Mar. 25, 2023</date>
 <country>United Kingdom</country>
 <town>Glasgow</town>
 <center>SWG3 Poetry Club</center>
 </concert>
 <concert id="1">
+<tickets>25</tickets>
 <date>Mar. 24, 2023</date>
 <country>United Kingdom</country>
 <town>Newcastle Upon Tyne</town>
