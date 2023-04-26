@@ -2,23 +2,30 @@
 session_start();
 require('components/connect.php');
 
-if (isset($_POST['username']) and isset($_POST['email']) and isset($_POST['password'])){
+if (isset($_POST['username']) && isset($_POST['email']) && isset($_POST['password']) && isset($_POST['confirmPass'])){
 
   unset($nameErr);
   unset($emailErr);
   unset($passErr);
+  unset($confimpassErr);
 
   $username = $_POST['username'];
   $email = $_POST['email'];
   $password = $_POST['password'];
   $confirmPass = $_POST['confirmPass'];
 
+  $query = "SELECT * FROM accounts WHERE username='$username'";
+  $result = mysqli_query($connection, $query);
+
     $name_regex = '/^[a-zA-Z ]+$/';
     $email_regex = '/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/';
-    $pass_regex = '/^(?=.*\d)(?=.*[A-Za-z])[0-9A-Za-z!@#$%]{1,12}$/';
+    $pass_regex = '/^(?=.*\d)(?=.*[A-Za-z])[0-9A-Za-z!@#$%]6,}$/';
 
     $errors = array();
 
+    if(mysqli_num_rows($result) > 0){
+        $errors['username'] = "Username already taken";
+    }
     if (!preg_match($name_regex, $username)) {
         $errors['username'] = "Username can only contain letters and spaces";
     }
@@ -26,10 +33,10 @@ if (isset($_POST['username']) and isset($_POST['email']) and isset($_POST['passw
         $errors['email'] = "Please enter a valid email or email format";
     }
     if (!preg_match($pass_regex, $password)) {
-        $errors['password'] = "Please enter a valid password";
+        $errors['password'] = "Please enter a valid password.<hr> A valid password has: <br> * At least 6 symbols<br> * Includes 1 special charcter<br> * Includes 1 number";
     }
     if (!preg_match($pass_regex, $confirmPass)) {
-        $errors['password'] = "Please enter a valid password for confirmation";
+        $errors['confirmpass'] = "Please enter a valid password for confirmation.<hr> A valid password has: <br> * At least 6 symbols<br> * Includes 1 special charcter<br> * Includes 1 number";
     }
     if ($confirmPass !== $password) {
         $errors['password'] = "The confirmation password does not match";
@@ -57,6 +64,10 @@ if (isset($_POST['username']) and isset($_POST['email']) and isset($_POST['passw
                 $passErr = $errors['password'];
                 $fmsgPASS = "$passErr";
             }
+            if (isset($errors['confirmpass'])) {
+                $confirmpassErr = $errors['confirmpass'];
+                $fmsgCONFIRM = "$confirmpassErr";
+            }
         }
     } else {
 
@@ -83,6 +94,7 @@ echo "<div class='d-flex justify-content-center'>
     if(isset($fmsgNAME)){ echo"<div class='alert alert-danger' role='alert'> ".$fmsgNAME."</div>"; }else{}
     if(isset($fmsgEMAIL)){ echo"<div class='alert alert-danger' role='alert'> ".$fmsgEMAIL."</div>"; }else{}
     if(isset($fmsgPASS)){ echo"<div class='alert alert-danger' role='alert'> ".$fmsgPASS."</div>"; }else{}
+    if(isset($fmsgCONFIRM)){ echo"<div class='alert alert-danger' role='alert'> ".$fmsgCONFIRM."</div>"; }else{}
 echo "
       <input type='username' class='form-control' name='username' placeholder='Username' required><br>
       <input type='mail' class='form-control' name='email' placeholder='Email' required><br>

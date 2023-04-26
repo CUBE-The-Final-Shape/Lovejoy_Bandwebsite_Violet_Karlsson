@@ -7,7 +7,6 @@ session_write_close();
 
 if($page == "index"){
 
-
   $id = $_GET['id'];
 
   $xml = simplexml_load_file('concerts.xml');
@@ -40,7 +39,6 @@ if($page == "index"){
       header('Location: error.php');
       exit();
   }
-
 
 } elseif($page == "order"){
 
@@ -127,7 +125,6 @@ if($page == "index"){
 
 } elseif($page == "edit") {
 
-
   $id = $_GET['id'];
   var_dump($_GET['id']);
 
@@ -163,7 +160,6 @@ if($page == "index"){
       exit();
   }
 
-
 } elseif($page == "update") {
 
   session_start();
@@ -198,7 +194,6 @@ if($page == "index"){
   header("location:tourdates.php");
   exit();
 }
-
 
 } elseif($page == "insert") {
 
@@ -243,5 +238,4 @@ if($page == "index"){
   header('Location: error.php');
   exit();
 }
-
  ?>
