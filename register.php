@@ -16,27 +16,31 @@ if (isset($_POST['username']) && isset($_POST['email']) && isset($_POST['passwor
 
   $query = "SELECT * FROM accounts WHERE username='$username'";
   $result = mysqli_query($connection, $query);
+  $query2 = "SELECT * FROM accounts WHERE email='$email'";
+  $result2 = mysqli_query($connection, $query2);
+
 
     $name_regex = '/^[a-zA-Z ]+$/';
     $email_regex = '/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/';
-    $pass_regex = '/^(?=.*\d)(?=.*[A-Za-z])[0-9A-Za-z!@#$%]6,}$/';
+    $pass_regex = '/^(?=.*\d)(?=.*[A-Za-z])[0-9A-Za-z]{6,12}$/';
 
     $errors = array();
 
     if(mysqli_num_rows($result) > 0){
         $errors['username'] = "Username already taken";
-    }
-    if (!preg_match($name_regex, $username)) {
+    } else if (!preg_match($name_regex, $username)) {
         $errors['username'] = "Username can only contain letters and spaces";
     }
-    if (!preg_match($email_regex, $email)) {
+    if(mysqli_num_rows($result2) > 0){
+        $errors['email'] = "The inputed email is already in use";
+    } else if (!preg_match($email_regex, $email)) {
         $errors['email'] = "Please enter a valid email or email format";
     }
     if (!preg_match($pass_regex, $password)) {
-        $errors['password'] = "Please enter a valid password.<hr> A valid password has: <br> * At least 6 symbols<br> * Includes 1 special charcter<br> * Includes 1 number";
+        $errors['password'] = "Please enter a valid password.<hr> A valid password has: <br> * At least 6 symbols<br> * Includes 1 letter<br> * Includes 1 number";
     }
     if (!preg_match($pass_regex, $confirmPass)) {
-        $errors['confirmpass'] = "Please enter a valid password for confirmation.<hr> A valid password has: <br> * At least 6 symbols<br> * Includes 1 special charcter<br> * Includes 1 number";
+        $errors['confirmpass'] = "Please enter a valid password for confirmation.<hr> A valid password has: <br> * At least 6 symbols<br> * Includes 1 letter<br> * Includes 1 number";
     }
     if ($confirmPass !== $password) {
         $errors['password'] = "The confirmation password does not match";
