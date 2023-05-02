@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 28, 2023 at 12:36 PM
+-- Generation Time: May 02, 2023 at 04:02 PM
 -- Server version: 10.4.25-MariaDB
 -- PHP Version: 8.1.10
 
@@ -41,8 +41,9 @@ CREATE TABLE `accounts` (
 --
 
 INSERT INTO `accounts` (`id`, `username`, `email`, `password`, `active`, `admin`) VALUES
+(0, 'noaccount', '', '', 0, 0),
 (1, 'user', 'violet@gmail.com', 'user', 0, 0),
-(2, 'admin', 'violet.thn.karlsson@gmail.com', 'admin', 0, 1),
+(2, 'admin', 'violet.thn.karlsson@gmail.com', 'admin123', 0, 1),
 (3, 'test', 'test@test.com', 'test123', 0, 0);
 
 -- --------------------------------------------------------
@@ -59,58 +60,20 @@ CREATE TABLE `orders` (
   `name` text DEFAULT NULL,
   `mail` text DEFAULT NULL,
   `phone_number` text DEFAULT NULL,
-  `ticket_amount` int(11) DEFAULT NULL
+  `ticket_amount` int(11) DEFAULT NULL,
+  `UID` int(11) DEFAULT NULL,
+  `xmlID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `orders`
 --
 
-INSERT INTO `orders` (`ID`, `timeofday`, `town`, `center`, `name`, `mail`, `phone_number`, `ticket_amount`) VALUES
-(32, 'Mar. 24, 2023', 'Newcastle Upon Tyne', 'Newcastle University Student Union', 'Violet Karlsson', 'violet.thn.karlsson@gmail.com', '0727061821', 10);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `posts`
---
-
-CREATE TABLE `posts` (
-  `postID` int(11) NOT NULL,
-  `userID` int(11) NOT NULL,
-  `title` varchar(255) NOT NULL,
-  `content` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `posts`
---
-
-INSERT INTO `posts` (`postID`, `userID`, `title`, `content`) VALUES
-(1, 2, 'Test post', 'This is an admin test post.'),
-(2, 1, 'Test post', 'This is a user test post.');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `replies`
---
-
-CREATE TABLE `replies` (
-  `replyID` int(11) NOT NULL,
-  `postID` int(11) NOT NULL,
-  `userID` int(11) NOT NULL,
-  `content` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `replies`
---
-
-INSERT INTO `replies` (`replyID`, `postID`, `userID`, `content`) VALUES
-(1, 1, 2, 'This is my reply to the post.'),
-(2, 1, 3, 'This is my reply.'),
-(3, 1, 1, 'This is my reply to the post.');
+INSERT INTO `orders` (`ID`, `timeofday`, `town`, `center`, `name`, `mail`, `phone_number`, `ticket_amount`, `UID`, `xmlID`) VALUES
+(63, 'Mar. 24, 2023', 'Newcastle Upon Tyne', 'Newcastle University Student Union', 'Violet Karlsson', 'violet.thn.karlsson@gmail.com', '0727061821', 2, 2, 1),
+(64, 'Mar. 24, 2023', 'Newcastle Upon Tyne', 'Newcastle University Student Union', 'Violet Karlsson', 'violet.thn.karlsson@gmail.com', '0727061821', 4, 1, 1),
+(65, ' Mar. 25, 2023', 'Glasgow', 'SWG3 Poetry Club', 'Violet Karlsson', 'violet.thn.karlsson@gmail.com', '0727061821', 1, 2, 2),
+(66, ' Mar. 29, 2023', 'Machester', 'Q2 Ritz Manchester', 'Violet Karlsson', 'violet.thn.karlsson@gmail.com', '0727061821', 3, 2, 5);
 
 --
 -- Indexes for dumped tables
@@ -122,28 +85,14 @@ INSERT INTO `replies` (`replyID`, `postID`, `userID`, `content`) VALUES
 ALTER TABLE `accounts`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `username` (`username`),
-  ADD UNIQUE KEY `id` (`id`) USING BTREE;
+  ADD KEY `id` (`id`);
 
 --
 -- Indexes for table `orders`
 --
 ALTER TABLE `orders`
-  ADD PRIMARY KEY (`ID`);
-
---
--- Indexes for table `posts`
---
-ALTER TABLE `posts`
-  ADD PRIMARY KEY (`postID`),
-  ADD KEY `userID` (`userID`);
-
---
--- Indexes for table `replies`
---
-ALTER TABLE `replies`
-  ADD PRIMARY KEY (`replyID`),
-  ADD KEY `postID` (`postID`),
-  ADD KEY `userID` (`userID`);
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `id` (`UID`) USING BTREE;
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -153,42 +102,23 @@ ALTER TABLE `replies`
 -- AUTO_INCREMENT for table `accounts`
 --
 ALTER TABLE `accounts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
-
---
--- AUTO_INCREMENT for table `posts`
---
-ALTER TABLE `posts`
-  MODIFY `postID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
--- AUTO_INCREMENT for table `replies`
---
-ALTER TABLE `replies`
-  MODIFY `replyID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=68;
 
 --
 -- Constraints for dumped tables
 --
 
 --
--- Constraints for table `posts`
+-- Constraints for table `orders`
 --
-ALTER TABLE `posts`
-  ADD CONSTRAINT `userID` FOREIGN KEY (`userID`) REFERENCES `accounts` (`id`);
-
---
--- Constraints for table `replies`
---
-ALTER TABLE `replies`
-  ADD CONSTRAINT `postID` FOREIGN KEY (`postID`) REFERENCES `posts` (`postID`),
-  ADD CONSTRAINT `uID` FOREIGN KEY (`userID`) REFERENCES `accounts` (`id`);
+ALTER TABLE `orders`
+  ADD CONSTRAINT `userID` FOREIGN KEY (`UID`) REFERENCES `accounts` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
