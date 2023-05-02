@@ -147,7 +147,7 @@ if ($result->num_rows > 0) {
         $result2 = $connection->query($sql2);
         if ($result2->num_rows > 0) {
           while($row = $result2->fetch_assoc()) {
-          echo "<div class='post p-3 albumDisplay'>";
+          echo "<div class='post p-3 my-2 albumDisplay'>";
           echo "<input type='hidden' name='id' value='".$row["ID"]."'>";
           echo "<input type='hidden' name='xmlID' value='".$row["xmlID"]."'>";
           echo "<h3>" . $row["town"] . "</h3>";

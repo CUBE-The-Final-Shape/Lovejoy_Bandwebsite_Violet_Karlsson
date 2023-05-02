@@ -36,14 +36,14 @@
 <center>Q2 Institute</center>
 </concert>
 <concert id="2">
-<tickets>100</tickets>
+<tickets>99</tickets>
 <date> Mar. 25, 2023</date>
 <country>United Kingdom</country>
 <town>Glasgow</town>
 <center>SWG3 Poetry Club</center>
 </concert>
 <concert id="1">
-<tickets>58</tickets>
+<tickets>54</tickets>
 <date>Mar. 24, 2023</date>
 <country>United Kingdom</country>
 <town>Newcastle Upon Tyne</town>
