@@ -8,8 +8,72 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $name = htmlspecialchars($_POST['name']);
     $email = $_POST['email'];
     $password = htmlspecialchars($_POST['pass']);
-    $confirmPass = $_POST['confirmPass'];
 
+    $query = "SELECT * FROM accounts WHERE username='$name'";
+    $result = mysqli_query($connection, $query);
+    $query2 = "SELECT * FROM accounts WHERE email='$email'";
+    $result2 = mysqli_query($connection, $query2);
+
+    $name_regex = '/^[a-zA-Z ]+$/';
+    $email_regex = '/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/';
+    $pass_regex = '/^(?=.*\d)(?=.*[A-Za-z])[0-9A-Za-z]{6,12}$/';
+
+    $errors = array();
+
+    $sql3 = "SELECT accounts.email, accounts.username FROM accounts WHERE id='$id'"; // Modify the query to join the "posts" and "users" tables
+    $result3 = $connection->query($sql3);
+    $row2 = mysqli_fetch_assoc($result3);
+
+    if(mysqli_num_rows($result) > 0){
+      if ($result3->num_rows > 0) {
+        if ($name != $row2["username"]){
+          $errors['username'] = "Username already taken";
+        }
+      }
+    } else if (!preg_match($name_regex, $name)) {
+        $errors['username'] = "Username can only contain letters and spaces";
+    }
+    if(mysqli_num_rows($result2) > 0){
+      if ($result3->num_rows > 0) {
+        if ($email != $row2["email"]){
+          $errors['email'] = "The inputed email is already in use";
+        }
+      }
+    } else if (!preg_match($email_regex, $email)) {
+        $errors['email'] = "Please enter a valid email or email format";
+    }
+    if (!preg_match($pass_regex, $password)) {
+        $errors['password'] = "Please enter a valid password.<hr> A valid password has: <br> * At least 6 symbols<br> * Includes 1 letter<br> * Includes 1 number";
+    }
+
+    $nameErr = "";
+    $emailErr = "";
+    $passErr = "";
+
+    $_SESSION['errors'] = $errors;
+
+    if (count($errors) > 0) {
+
+        if (isset($_SESSION['errors'])) {
+          $errors = $_SESSION['errors'];
+        unset($_SESSION['errors']);
+        }
+
+        if (isset($errors)) {
+            if (isset($errors['username'])) {
+                $nameErr = $errors['username'];
+                $fmsgNAME = "$nameErr";
+            }
+            if (isset($errors['email'])) {
+                $emailErr = $errors['email'];
+                $fmsgEMAIL = "$emailErr";
+            }
+            if (isset($errors['password'])) {
+                $passErr = $errors['password'];
+                $fmsgPASS = "$passErr";
+            }
+        }
+      } else if (empty($nameErr) && empty($emailErr) && empty($passErr)) {
     // prepare and execute update query
     $sql = "UPDATE accounts SET username='$name', email='$email', password='$password' WHERE id=$id";
 
@@ -21,6 +85,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     $connection->close();
+  } else {
+    $_SESSION['alert'] = "<h1 class='albumDisplay'>Account update failed.</h1>";
+  }
 }
 
 $_SESSION['page'] = "account";
@@ -59,6 +126,9 @@ if ($result->num_rows > 0) {
               </div>";
         echo "<div class='post py-3'>";
         echo "<form method='POST' name='form1'>";
+        if(isset($fmsgNAME)){ echo"<div class='alert alert-danger' role='alert'> ".$fmsgNAME."</div>"; }else{}
+        if(isset($fmsgEMAIL)){ echo"<div class='alert alert-danger' role='alert'> ".$fmsgEMAIL."</div>"; }else{}
+        if(isset($fmsgPASS)){ echo"<div class='alert alert-danger' role='alert'> ".$fmsgPASS."</div>"; }else{}
         echo "<input type='hidden' name='UID' value='".$row["id"]."'>";
         echo "<tr><td>Account name:</td></tr>
               <input type='name' class='form-control' name='name' placeholder='Name' value='". $row["username"] ."'><br>";
@@ -96,15 +166,6 @@ if ($result->num_rows > 0) {
 }
 
 echo "</div></div>"; // Close the row
-echo "<footer class='footer py-3 bg-dark fixed-bottom d-none d-lg-block'>";
-echo "<ul class='nav justify-content-center border-bottom pb-3 mb-3'>";
-echo "<li class='nav-item'><a href='Index.php#' class='nav-link px-2 text-muted'>Index</a></li>";
-echo "<li class='nav-item'><a href='Index.php#albums' class='nav-link px-2 text-muted'>Music</a></li>";
-echo "<li class='nav-item'><a href='Index.php#about' class='nav-link px-2 text-muted'>This is Lovejoy</a></li>";
-echo "<li class='nav-item'><a href='Index.php#concerts' class='nav-link px-2 text-muted'>Concerts</a></li>";
-echo "</ul>";
-echo "<span class='mb-3 ms-5 mb-md-0 text-muted'>© 2023 Violet Karlsson</span>";
-echo "</footer>";
 echo "</body>";
 echo "</html>";
 
