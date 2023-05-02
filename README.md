@@ -7,8 +7,8 @@ For our final assignment in webserver development we were tasked to create a web
 + Database driven login
 + "Ordering system" using a database (Can't send emails)
 + Account registration
-
-# To be added
 + Account page
 + Account deletion
 + Cancel orders if ordered while logged in
+
+# To be added
