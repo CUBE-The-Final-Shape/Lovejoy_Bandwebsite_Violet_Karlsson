@@ -8,8 +8,8 @@ For our final assignment in webserver development we were tasked to create a web
 + "Ordering system" using a database (Can't send emails)
 + Account registration
 + Account page
-+ Account deletion
 + Cancel orders if ordered while logged in
 
 # To be added
++ Account deletion
 + Nothing. I'm done
