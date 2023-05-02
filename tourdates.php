@@ -71,6 +71,7 @@ if(isset($_SESSION['passkey'])){
         if ($i == 1 && $page == 1){
           $highest_id = max(array_keys($data_by_id));
         echo "<a href='newtour.php?id=$highest_id' type='button' class='btn btn-dark my-2'>New entry</a>";
+        echo "<a href='index.php' type='button' class='btn btn-dark my-2 float-end'>Index</a>";
         }
 
   ksort($data_by_id);

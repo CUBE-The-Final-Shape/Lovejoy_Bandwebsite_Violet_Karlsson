@@ -1,5 +1,7 @@
 <?php
-echo" <html>
+echo"
+  <!DOCTYPE html>
+  <html>
   <head>
   <title>Lovejoy - Unoffical</title>
   <meta charset='utf-8'>

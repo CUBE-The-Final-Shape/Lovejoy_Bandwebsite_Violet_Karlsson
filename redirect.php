@@ -7,11 +7,8 @@ session_write_close();
 
 if($page == "index"){
 
-
   $id = $_GET['id'];
-
   $xml = simplexml_load_file('concerts.xml');
-
   $concert = $xml->xpath("//concert[@id='$id']")[0];
 
   if ($concert) {
@@ -40,7 +37,6 @@ if($page == "index"){
       header('Location: error.php');
       exit();
   }
-
 
 } elseif($page == "order"){
 
@@ -112,14 +108,35 @@ if($page == "index"){
       $xml->updateXmlFile($id, $tickets, $date, $country, $town, $center, $ticketamount);
       $xml->writeXmlFile();
       // Insert the data into the database
-      $sql = "INSERT INTO orders (timeofday, town, center, name, mail, phone_number, ticket_amount) VALUES ('$date', '$town', '$center', '$name', '$email', '$phone', '$ticketamount')";
-      if (mysqli_query($connection, $sql)) {
-          header('Location: thanks.php');
-          exit();
+      if (isset($_SESSION['username'])){
+
+        $username = $_SESSION['username'];
+        $sql = "SELECT accounts.id FROM accounts WHERE username='$username'"; // Modify the query to join the "posts" and "users" tables
+        $result = $connection->query($sql);
+
+        while($row = $result->fetch_assoc()) {
+          $UID = $row["id"];
+        }
+
+        $sql = "INSERT INTO orders (timeofday, town, center, name, mail, phone_number, ticket_amount, UID, xmlID) VALUES ('$date', '$town', '$center', '$name', '$email', '$phone', '$ticketamount', '$UID', '$id')";
+        if (mysqli_query($connection, $sql)) {
+            mysqli_close($connection);
+            header('Location: thanks.php');
+            exit();
+        } else {
+            echo "Error adding record: " . mysqli_error($connection);
+        }
       } else {
-          echo "Error adding record: " . mysqli_error($connection);
+        $sql = "INSERT INTO orders (timeofday, town, center, name, mail, phone_number, ticket_amount, UID, xmlID) VALUES ('$date', '$town', '$center', '$name', '$email', '$phone', '$ticketamount', '', '$id')";
+        if (mysqli_query($connection, $sql)) {
+          mysqli_close($connection);
+            header('Location: thanks.php');
+            exit();
+        } else {
+            echo "Error adding record: " . mysqli_error($connection);
+        }
       }
-  }
+    }
   // Close the database connection
   mysqli_close($conn);
 
@@ -127,12 +144,9 @@ if($page == "index"){
 
 } elseif($page == "edit") {
 
-
   $id = $_GET['id'];
-  var_dump($_GET['id']);
 
   $xml = simplexml_load_file('concerts.xml');
-  var_dump($xml);
 
   $concert = $xml->xpath("//concert[@id='$id']")[0];
 
@@ -162,7 +176,6 @@ if($page == "index"){
       header('Location: error.php');
       exit();
   }
-
 
 } elseif($page == "update") {
 
@@ -198,7 +211,6 @@ if($page == "index"){
   header("location:tourdates.php");
   exit();
 }
-
 
 } elseif($page == "insert") {
 
@@ -238,10 +250,67 @@ if($page == "index"){
 
   }
 
+} else if ($page == "account"){
+  session_start();
+
+  require('components/connect.php');
+
+  require('xml_class.php');
+  require('constant.php');
+
+  $xml = simplexml_load_file('concerts.xml');
+
+  $id = $_GET['id'];
+  $xmlID = $_GET['xmlID'];
+
+  $concert = $xml->xpath("//concert[@id='$xmlID']")[0];
+
+  $sql2 = "SELECT * FROM orders WHERE id = $id";
+  $result2 = $connection->query($sql2);
+  $row = mysqli_fetch_assoc($result2);
+
+  if ($result2->num_rows > 0) {
+    $ticketamount = (int) $row["ticket_amount"];
+      if ($concert) {
+            $tickets = (int) $concert->tickets;
+            $date = (string) $concert->date;
+            $country = (string) $concert->country;
+            $town = (string) $concert->town;
+            $center = (string) $concert->center;
+
+            $tickets = $tickets + $ticketamount;
+          }
+}
+  if (!$connection) {
+    die("Connection failed: " . mysqli_connect_error());
+}
+
+$sql = "DELETE FROM orders WHERE id = $id";
+
+if (mysqli_query($connection, $sql)) {
+    $_SESSION['alert'] = "<h1 class='albumDisplay'>Successfully removed booking.</h1>";
+    $xml = new xml_opration;
+    $id = $xmlID;
+    $xml->updateXmlFile($id, $tickets, $date, $country, $town, $center);
+    $xml->writeXmlFile();
+    mysqli_close($connection);
+    header('Location: account.php');
+    session_write_close();
+    exit();
+} else {
+    $_SESSION['alert'] = "Error deleting booking: " . mysqli_error($connection);
+    mysqli_close($connection);
+    header('Location: account.php');
+    session_write_close();
+    exit();
+}
+
+// Close the connection
+mysqli_close($connection);
+
 } else {
 
   header('Location: error.php');
   exit();
 }
-
  ?>

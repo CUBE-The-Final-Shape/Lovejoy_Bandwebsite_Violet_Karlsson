@@ -18,7 +18,9 @@ echo" <nav class='navbar navbar-expand-sm bg-dark navbar-dark sticky-top'>
         </li>
         <li class='nav-item'>";
           if(isset($auth)){
-            echo"<a class='nav-link navbarFont' href='components/logout.php'>Sign out</a>";
+            echo"<li class='nav-item'>
+              <a class='nav-link navbarFont' href='account.php'>My account</a>
+            </li><a class='nav-link navbarFont' href='components/logout.php'>Sign out</a>";
           }else{
             echo"<a class='nav-link navbarFont' href='login.php'>Sign in/Sign up</a>";
           }
