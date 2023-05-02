@@ -45,7 +45,7 @@ if (isset($errors)) {
 include ('constant.php');
 
 if(isset($date)){
-  
+
   include('components/head.php');
   include('components/navbar.php');
 
