@@ -12,4 +12,3 @@ For our final assignment in webserver development we were tasked to create a web
 
 # To be added
 + Account deletion
-+ Nothing. I'm done
