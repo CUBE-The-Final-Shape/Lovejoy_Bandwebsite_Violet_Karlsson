@@ -88,7 +88,7 @@ if(isset($_SESSION['passkey'])){
                     <td>Tickets available: ".$val['tickets']."</td>
                   </tr><br>
                   <a href='redirect.php?id=$id&tickets=".$val['tickets']."' type='button' class='btn btn-dark my-2'>Update entry</a>
-                  <a href='components/delete.php?id=$id' type='button' class='btn btn-dark my-2'>Delete entry</a>
+                  <a href='delete.php?id=$id' type='button' class='btn btn-dark my-2'>Delete entry</a>
                   </div>
                </tr>";
       }

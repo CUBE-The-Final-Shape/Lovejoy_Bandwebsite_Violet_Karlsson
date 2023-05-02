@@ -48,7 +48,7 @@ if(isset($id)){
   if($auth == "Admin"){
     include('components/head.php');
     include('components/navbar.php');
-    
+
     echo "<div class='px-5'>";
     echo "<div class='row'>
         <div class='col albumDisplay m-2'>
@@ -74,17 +74,6 @@ if(isset($id)){
     ";
     echo "</div>";
     echo "</table></div>
-        <div class='footer'>
-          <footer class='py-3 footer'>
-            <ul class='nav justify-content-center border-bottom pb-3 mb-3>
-              <li class='nav-item'><a href='index.php#' class='nav-link px-2 text-muted'>Top</a></li>
-              <li class='nav-item'><a href='index.php#albums' class='nav-link px-2 text-muted'>Music</a></li>
-              <li class='nav-item'><a href='index.php#about' class='nav-link px-2 text-muted'>This is Lovejoy</a></li>
-              <li class='nav-item'><a href='index.php#concerts' class='nav-link px-2 text-muted'>Concerts</a></li>
-            </ul>
-          <span class='mb-3 ms-5 mb-md-0 text-muted'>© 2023 Violet Karlsson</span>
-        </div>
-        </footer>
         </div></body>";
     echo "</html>";}
   } else {
