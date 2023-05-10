@@ -106,7 +106,6 @@ if(isset($_SESSION['username'])){
   include('components/head.php');
   include('components/navbar.php');
 
-
 echo "<div class='container mt-5'>";
 echo "$alert";
 
@@ -170,7 +169,7 @@ echo "</body>";
 echo "</html>";
 
 } else {
-  header('noentry.php');
+  header('Location: noentry.php');
 }
 
 ?>
